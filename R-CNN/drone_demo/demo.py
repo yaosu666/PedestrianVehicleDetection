@@ -22,7 +22,6 @@ image = cv2.imread("visdrone_test_img_0000001_02999_d_0000005.jpg")
 start = time.time()
 predictions = coco_demo.run_on_opencv_image(image)
 print('predict time:',  time.time()-start)
-#cv2.imwrite('drone_res.jpg', predictions)
-cv2.imwrite('test_img_result.jpg', predictions)
+cv2.imwrite('demo_result.jpg', predictions)
 
 print('Total time:',  time.time()-START)

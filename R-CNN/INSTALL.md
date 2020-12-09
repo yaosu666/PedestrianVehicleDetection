@@ -1,13 +1,13 @@
 ## Installation
 
 ### Requirements:
-- PyTorch 1.0 from a nightly release. It **will not** work with 1.0 nor 1.0.1. Installation instructions can be found in https://pytorch.org/get-started/locally/
+- PyTorch 1.1
 - torchvision from master
 - cocoapi
 - yacs
 - matplotlib
 - GCC >= 4.9
-- (optional) OpenCV for the webcam demo
+- opencv
 
 
 ### Step-by-step installation
@@ -24,19 +24,16 @@ conda activate maskrcnn_benchmark
 conda install ipython
 
 # maskrcnn_benchmark and coco api dependencies
-pip install ninja yacs cython matplotlib tqdm
+pip install ninja yacs cython matplotlib tqdm opencv-contrib-python
 
 # follow PyTorch installation in https://pytorch.org/get-started/locally/
 # we give the instructions for CUDA 9.0
-conda install -c pytorch pytorch-nightly torchvision cudatoolkit=9.0
+pip install torch==1.1.0 torchvision==0.3.0 -f https://download.pytorch.org/whl/torch_stable.html
 
 export INSTALL_DIR=$PWD
 
 # install pycocotools
-cd $INSTALL_DIR
-git clone https://github.com/cocodataset/cocoapi.git
-cd cocoapi/PythonAPI
-python setup.py build_ext install
+pip install pycocotools
 
 # install PyTorch Detection
 cd $INSTALL_DIR
@@ -51,8 +48,4 @@ python setup.py build develop
 
 
 unset INSTALL_DIR
-
-# or if you are on macOS
-# MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CXX=clang++ python setup.py build develop
 ```
-
