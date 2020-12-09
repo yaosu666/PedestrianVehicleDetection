@@ -1,0 +1,28 @@
+from maskrcnn_benchmark.config import cfg
+from predictor import COCODemo
+import cv2
+import time
+START = time.time()
+config_file = "e2e_faster_rcnn_X_101_32x8d_FPN_1x_visdrone.yaml"
+
+# update the config options with the config file
+cfg.merge_from_file(config_file)
+# manual override some options
+# cfg.merge_from_list(["MODEL.DEVICE", "cpu"])
+cfg.merge_from_list(["MODEL.WEIGHT", "visdrone_model_0360000.pth"])
+
+coco_demo = COCODemo(
+    cfg,
+    min_image_size=800,
+    confidence_threshold=0.7,
+)
+# load image and then run prediction
+
+image = cv2.imread("visdrone_test_img_0000001_02999_d_0000005.jpg")
+start = time.time()
+predictions = coco_demo.run_on_opencv_image(image)
+print('predict time:',  time.time()-start)
+#cv2.imwrite('drone_res.jpg', predictions)
+cv2.imwrite('test_img_result.jpg', predictions)
+
+print('Total time:',  time.time()-START)
